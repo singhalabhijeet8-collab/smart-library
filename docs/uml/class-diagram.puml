@@ -1,0 +1,73 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class LibraryApp {
+  - token : String
+  - loggedInUser : String
+  - booksTable : JTable
+  - issueLogsTable : JTable
+  + main(args : String[]) : void
+  - request(method : String, path : String, body : String) : String
+  - loadBooks() : void
+  - loadIssueLogs() : void
+}
+
+class SmartLibraryApp
+
+class Book {
+  - id : Long
+  - title : String
+  - author : String
+  - available : boolean
+}
+
+class User {
+  - id : Long
+  - name : String
+  - email : String
+  - password : String
+}
+
+class Issue {
+  - id : Long
+  - bookId : Long
+  - userId : Long
+  - issueDate : LocalDate
+  - dueDate : LocalDate
+  - returned : boolean
+  - returnDate : LocalDate
+}
+
+class BookController
+class UserController
+class AuthController
+class IssueController
+
+class BookService
+class UserService
+class IssueService
+
+interface BookRepository
+interface UserRepository
+interface IssueRepository
+
+LibraryApp ..> BookController : HTTP /books
+LibraryApp ..> UserController : HTTP /users
+LibraryApp ..> AuthController : HTTP /auth
+LibraryApp ..> IssueController : HTTP /issues
+
+BookController --> BookService
+UserController --> UserService
+IssueController --> IssueService
+AuthController --> UserRepository
+
+BookService --> BookRepository
+UserService --> UserRepository
+IssueService --> IssueRepository
+IssueService --> BookRepository
+IssueService --> UserRepository
+
+BookRepository ..> Book
+UserRepository ..> User
+IssueRepository ..> Issue
+@enduml

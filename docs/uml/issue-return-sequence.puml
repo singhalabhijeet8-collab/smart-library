@@ -1,0 +1,30 @@
+@startuml
+actor "Admin/Librarian" as Admin
+participant "LibraryApp Swing GUI" as GUI
+participant "IssueController" as Controller
+participant "IssueService" as Service
+database "MySQL library_db" as DB
+
+== Issue Book ==
+Admin -> GUI : Enter Book ID and User ID
+GUI -> Controller : POST /issues?bookId=&userId=
+Controller -> Service : issueBook(bookId, userId)
+Service -> DB : find book by id
+Service -> DB : find user by id
+Service -> DB : save issue record
+Service -> DB : update book available=false
+Service --> Controller : Issue
+Controller --> GUI : Issue JSON
+GUI --> Admin : Show success and refresh logs
+
+== Return Book ==
+Admin -> GUI : Enter Issue ID
+GUI -> Controller : POST /issues/return/{id}
+Controller -> Service : returnBook(issueId)
+Service -> DB : find issue by id
+Service -> DB : update book available=true
+Service -> DB : update issue returned=true, returnDate=today
+Service --> Controller : done
+Controller --> GUI : Success message
+GUI --> Admin : Show success and refresh logs
+@enduml

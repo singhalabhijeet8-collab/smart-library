@@ -1,0 +1,34 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity "user" as users {
+  * id : BIGINT <<PK>>
+  --
+  name : VARCHAR
+  email : VARCHAR <<UNIQUE>>
+  password : VARCHAR
+}
+
+entity "book" as books {
+  * id : BIGINT <<PK>>
+  --
+  title : VARCHAR
+  author : VARCHAR
+  available : BOOLEAN
+}
+
+entity "issue" as issues {
+  * id : BIGINT <<PK>>
+  --
+  book_id : BIGINT <<FK>>
+  user_id : BIGINT <<FK>>
+  issue_date : DATE
+  due_date : DATE
+  returned : BOOLEAN
+  return_date : DATE
+}
+
+users ||--o{ issues : borrows
+books ||--o{ issues : issued_as
+@enduml
