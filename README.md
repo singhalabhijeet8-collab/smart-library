@@ -124,3 +124,17 @@ Project diagrams are stored in `docs/`:
 | Integration Testing | Completed with controller API test |
 | Git/GitHub Collaboration | Initialize Git and push repository before submission |
 | Artifactory Management | Local jar artifact generated in `backend/target` |
+
+## Team Contributions
+
+| Member | Contribution | Share |
+|---|---|---|
+| Abhijeet | Project setup, Swing desktop application, GitHub setup, final integration, and main README | 40% |
+| Shubh | Backend REST controllers, security configuration, and API documentation | 20% |
+| Sarthak | Entity models, repositories, service layer, and database schema | 20% |
+| Kanika | Frontend dashboard, UML diagrams, and project documentation | 20% |
+
+## Maintainer Notes
+
+Abhijeet handled the final project integration by organizing the desktop app, backend, frontend, documentation, and GitHub repository structure into one complete submission.
+
